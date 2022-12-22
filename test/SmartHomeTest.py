@@ -47,4 +47,11 @@ class SmartHomeTest(unittest.TestCase):
         light_on = self.sm.light_on
         self.assertFalse(light_on)
 
+    @patch.object(GPIO, "input")
+    def test_manage_light_level_off_high_lux(self, mock_input):
+        mock_input.return_value = [1, 600]
+        self.sm.manage_light_level()
+        light_on = self.sm.light_on
+        self.assertFalse(light_on)
+
 
