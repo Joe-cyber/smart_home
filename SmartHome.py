@@ -21,6 +21,8 @@ class SmartHome:
     PHOTO_PIN = 27  # Photoresistor pin
 
     LIGHT_THRESHOLD = 500
+    WINDOW_OPEN_DUTY_CYCLE = (180 / 18) + 2
+    WINDOW_CLOSE_DUTY_CYCLE = (0 / 18) + 2
 
     def __init__(self):
         """
@@ -106,7 +108,11 @@ class SmartHome:
         try:
             # Your code goes here
             # Remove the pass
-            pass
+
+            if self.dht_indoor.temperature + 2 < self.dht_outdoor.temperature:
+                self.servo.ChangeDutyCycle(self.WINDOW_OPEN_DUTY_CYCLE)
+                self.window_open = True
+
         except RuntimeError as error:
             print(error.args[0])
             time.sleep(2)
