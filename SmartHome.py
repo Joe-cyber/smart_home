@@ -75,7 +75,13 @@ class SmartHome:
          the system turns on the smart light bulb as usual.
 
         """
-        self.light_on = True
+        if self.check_room_occupancy():
+            GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
+            self.light_on = True
+        else:
+            GPIO.output(self.LIGHT_PIN, GPIO.LOW)
+            self.light_on = False
+
 
     def measure_lux(self) -> float:
         """
