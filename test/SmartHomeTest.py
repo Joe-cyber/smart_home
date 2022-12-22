@@ -56,28 +56,28 @@ class SmartHomeTest(unittest.TestCase):
 
     @patch('mock.adafruit_dht.DHT11.temperature', new_callable=PropertyMock)
     def test_manage_window_open_window(self, mock_temperature):
-        mock_temperature.side_effect = [18, 21, 18, 21]
+        mock_temperature.side_effect = [18.0, 21.1, 18.0, 21.1]
         self.sm.manage_window()
         window_open = self.sm.window_open
         self.assertTrue(window_open)
 
     @patch('mock.adafruit_dht.DHT11.temperature', new_callable=PropertyMock)
     def test_manage_window_close_window(self, mock_temperature):
-        mock_temperature.side_effect = [23, 19, 23, 19, 23, 19]
+        mock_temperature.side_effect = [23.2, 19.1, 23.2, 19.1, 23.2, 19.1]
         self.sm.manage_window()
         window_open = self.sm.window_open
         self.assertFalse(window_open)
 
     @patch('mock.adafruit_dht.DHT11.temperature', new_callable=PropertyMock)
     def test_manage_window_temperature_out_of_range_1(self, mock_temperature):
-        mock_temperature.side_effect = [16, 20]
+        mock_temperature.side_effect = [16.8, 20.2]
         self.sm.manage_window()
         window_open = self.sm.window_open
         self.assertFalse(window_open)
 
     @patch('mock.adafruit_dht.DHT11.temperature', new_callable=PropertyMock)
     def test_manage_window_temperature_out_of_range_2(self, mock_temperature):
-        mock_temperature.side_effect = [18, 31]
+        mock_temperature.side_effect = [18.2, 31.0]
         self.sm.manage_window()
         window_open = self.sm.window_open
         self.assertFalse(window_open)
