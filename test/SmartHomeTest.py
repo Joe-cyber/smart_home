@@ -25,3 +25,9 @@ class SmartHomeTest(unittest.TestCase):
         mock_input.return_value = 1
         occ = self.sm.check_room_occupancy()
         self.assertFalse(occ)
+
+    @patch.object(GPIO, "input")
+    def test_manage_light_level_on(self, mock_input):
+        mock_input.return_value = 0
+        light_on = self.sm.light_on
+        self.assertTrue(light_on)
