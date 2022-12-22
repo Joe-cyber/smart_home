@@ -112,6 +112,9 @@ class SmartHome:
             if self.dht_indoor.temperature + 2 < self.dht_outdoor.temperature:
                 self.servo.ChangeDutyCycle(self.WINDOW_OPEN_DUTY_CYCLE)
                 self.window_open = True
+            elif self.dht_indoor.temperature > self.dht_outdoor.temperature + 2:
+                self.servo.ChangeDutyCycle(self.WINDOW_CLOSE_DUTY_CYCLE)
+                self.window_open = False
 
         except RuntimeError as error:
             print(error.args[0])

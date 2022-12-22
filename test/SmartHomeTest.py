@@ -63,7 +63,7 @@ class SmartHomeTest(unittest.TestCase):
 
     @patch('mock.adafruit_dht.DHT11.temperature', new_callable=PropertyMock)
     def test_manage_window_close_window(self, mock_temperature):
-        mock_temperature.side_effect = [23, 19]
+        mock_temperature.side_effect = [23, 19, 23, 19]
         self.sm.manage_window()
         window_open = self.sm.window_open
         self.assertFalse(window_open)
