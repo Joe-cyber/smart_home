@@ -75,7 +75,7 @@ class SmartHome:
          the system turns on the smart light bulb as usual.
 
         """
-        pass
+        self.light_on = True
 
     def measure_lux(self) -> float:
         """
