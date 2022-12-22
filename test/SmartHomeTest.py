@@ -82,3 +82,9 @@ class SmartHomeTest(unittest.TestCase):
         window_open = self.sm.window_open
         self.assertFalse(window_open)
 
+    @patch(GPIO, 'input')
+    def test_monitor_air_quality_buzzer_on(self, mock_input):
+        mock_input.return_value = 500
+        self.sm.monitor_air_quality()
+        buzzer_on = self.sm.buzzer_on
+        self.assertTrue(buzzer_on)
