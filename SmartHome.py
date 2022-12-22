@@ -75,7 +75,7 @@ class SmartHome:
          the system turns on the smart light bulb as usual.
 
         """
-        if self.check_room_occupancy() and self.measure_lux() >= 500:
+        if self.check_room_occupancy() and self.measure_lux() < 500:
             GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
             self.light_on = True
         else:
