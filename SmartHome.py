@@ -108,13 +108,13 @@ class SmartHome:
         try:
             # Your code goes here
             # Remove the pass
-
-            if self.dht_indoor.temperature + 2 < self.dht_outdoor.temperature:
-                self.servo.ChangeDutyCycle(self.WINDOW_OPEN_DUTY_CYCLE)
-                self.window_open = True
-            elif self.dht_indoor.temperature > self.dht_outdoor.temperature + 2:
-                self.servo.ChangeDutyCycle(self.WINDOW_CLOSE_DUTY_CYCLE)
-                self.window_open = False
+            if 18 <= self.dht_indoor.temperature <= 30 and 18 <= self.dht_outdoor.temperature <= 30:
+                if self.dht_indoor.temperature + 2 < self.dht_outdoor.temperature:
+                    self.servo.ChangeDutyCycle(self.WINDOW_OPEN_DUTY_CYCLE)
+                    self.window_open = True
+                elif self.dht_indoor.temperature > self.dht_outdoor.temperature + 2:
+                    self.servo.ChangeDutyCycle(self.WINDOW_CLOSE_DUTY_CYCLE)
+                    self.window_open = False
 
         except RuntimeError as error:
             print(error.args[0])
