@@ -20,6 +20,8 @@ class SmartHome:
     LIGHT_PIN = 26
     PHOTO_PIN = 27  # Photoresistor pin
 
+    LIGHT_THRESHOLD = 500
+
     def __init__(self):
         """
         Constructor
@@ -75,7 +77,7 @@ class SmartHome:
          the system turns on the smart light bulb as usual.
 
         """
-        if self.check_room_occupancy() and self.measure_lux() < 500:
+        if self.check_room_occupancy() and self.measure_lux() < self.LIGHT_THRESHOLD:
             GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
             self.light_on = True
         else:
