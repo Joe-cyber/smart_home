@@ -118,8 +118,6 @@ class SmartHome:
             else:
                 self.servo.ChangeDutyCycle(self.WINDOW_CLOSE_DUTY_CYCLE)
                 self.window_open = False
-
-
         except RuntimeError as error:
             print(error.args[0])
             time.sleep(2)
@@ -140,4 +138,4 @@ class SmartHome:
         if the amount of detected gas is greater than or equal to 500 PPM,
         the system turns on the buzzer until the smoke level goes below the threshold of 500 PPM.
         """
-        pass
+        self.buzzer_on = True
